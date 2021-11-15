@@ -21,7 +21,7 @@
     <div class="md:col-span-5 col-span-full">
       <quantity @setQuantity="setQuantity" />
     </div>
-    <div class="md:col-span-7 col-span-full relative h-10" withIcon="true">
+    <div class="md:col-span-7 col-span-full relative h-10">
       <Button
         class="h-full"
         :withIcon="true"

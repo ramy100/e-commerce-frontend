@@ -2,10 +2,10 @@
   <div className="flex justify-between pt-6 pb-6 ">
     <ul className="grid grid-flow-col items-center gap-6 ">
       <li class="md:hidden mt-1" @click="sideMenu = true">
-        <img src="/images/icon-menu.svg" alt="" />
+        <img src="/images/icon-menu.svg" alt="menu" />
       </li>
       <li>
-        <img src="/images/logo.svg" alt="" />
+        <img src="/images/logo.svg" alt="logo" />
       </li>
       <Link
         v-for="link in links"
@@ -18,7 +18,7 @@
     </ul>
     <ul className="grid grid-flow-col items-center gap-5">
       <li @click="showCart = !showCart">
-        <img src="/images/icon-cart.svg" alt="" />
+        <img src="/images/icon-cart.svg" alt="cart" />
         <div
           v-if="quantity"
           class="
@@ -40,7 +40,7 @@
           class="border-orange border-2 rounded-full"
           width="50"
           src="/images/image-avatar.png"
-          alt=""
+          alt="avatar"
         />
       </li>
       <Cart v-if="showCart" @close="showCart = false" />

@@ -3,7 +3,7 @@
     <img
       class="w-16 rounded-lg"
       src="/images/image-product-1-thumbnail.jpg"
-      alt=""
+      alt="product image"
     />
     <div class="grid grid-cols-2">
       <div class="text-blue-grayish col-span-full">
@@ -16,7 +16,7 @@
       <img
         @click="$store.commit('reset')"
         src="/images/icon-delete.svg"
-        alt=""
+        alt="delete"
       />
     </div>
   </div>

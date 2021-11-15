@@ -29,8 +29,7 @@
           class="h-4 cursor-pointer"
           @click="close"
           src="/images/icon-close.svg"
-          alt=""
-          srcset=""
+          alt="close"
         />
       </div>
       <div class="cart-items">

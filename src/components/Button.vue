@@ -12,8 +12,13 @@
       gap-3
     "
   >
-    <img v-if="withIcon" class="cart-icon" src="/images/icon-cart.svg" alt="" />
-    <h4>{{ title }}</h4>
+    <img
+      v-if="withIcon"
+      class="cart-icon"
+      src="/images/icon-cart.svg"
+      alt="cart"
+    />
+    <h5>{{ title }}</h5>
   </div>
 </template>
 

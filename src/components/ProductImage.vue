@@ -20,7 +20,7 @@
         "
         @click="goToImage('prev')"
       >
-        <img src="/images/icon-previous.svg" alt="" srcset="" />
+        <img src="/images/icon-previous.svg" alt="previous arrow" />
       </div>
 
       <img
@@ -28,6 +28,7 @@
         @click="screenWidth > 768 && open()"
         class="md:rounded-2xl sm:w-full"
         :class="{ 'cursor-pointer': screenWidth > 768 }"
+        alt="product img"
       />
       <div
         v-if="screenWidth < 768 || isModal"
@@ -48,7 +49,7 @@
         "
         @click="goToImage('next')"
       >
-        <img src="/images/icon-next.svg" alt="" srcset="" />
+        <img src="/images/icon-next.svg" alt="next arrow" />
       </div>
     </div>
     <ul class="md:grid grid-cols-4 gap-2 hidden">
@@ -65,6 +66,7 @@
           }"
           :src="image"
           class="rounded-2xl"
+          alt="small product image"
         />
         <div
           :class="{ hidden: active != image }"

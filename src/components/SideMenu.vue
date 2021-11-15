@@ -19,8 +19,7 @@
               class="mb-10 cursor-pointer"
               @click.self="closeMenu"
               src="/images/icon-close.svg"
-              alt=""
-              srcset=""
+              alt="close"
             />
           </li>
           <li v-for="link in links" :key="link">{{ link }}</li>
