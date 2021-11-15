@@ -1,5 +1,5 @@
 <template>
-  <div class="grid gap-5 justify-center select-none">
+  <div class="grid gap-5 items-center select-none">
     <div class="relative">
       <div
         v-if="screenWidth < 768 || isModal"
@@ -36,10 +36,10 @@
           absolute
           md:-right-5
           right-5
-          top-1/2
           bg-white
           justify-center
           items-center
+          top-1/2
           rounded-full
           flex
           p-3
@@ -52,13 +52,9 @@
         <img src="/images/icon-next.svg" alt="next arrow" />
       </div>
     </div>
-    <ul class="md:grid grid-cols-4 gap-2 hidden">
-      <li
-        v-for="(image, index) in images"
-        :class="{ 'border-orange border-2': active == image }"
-        :key="image"
-        class="rounded-2xl duration-300"
-      >
+
+    <div class="md:grid grid-cols-4 gap-2 hidden">
+      <div v-for="(image, index) in images" :key="image" class="relative">
         <img
           @click="setActiveImage(index)"
           :class="{
@@ -80,24 +76,32 @@
             rounded-2xl
           "
         ></div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
-  <carosel
-    v-if="screenWidth > 768 && showCarosel"
-    :images="images"
-    @close="close"
-  >
-    <product-image :images="images" :isModal="true" />
-  </carosel>
+  <teleport to="body">
+    <transition name="fade" mode="in-out">
+      <overlay v-if="screenWidth > 768 && showCarosel" @close="close" />
+    </transition>
+    <transition name="scale" mode="in-out">
+      <carosel
+        v-if="screenWidth > 768 && showCarosel"
+        :images="images"
+        @close="close"
+      >
+        <product-image :images="images" :isModal="true" />
+      </carosel>
+    </transition>
+  </teleport>
 </template>
 
 <script >
 import { ref } from "@vue/reactivity";
 import Carosel from "./Carosel.vue";
 import { onMounted } from "@vue/runtime-core";
+import Overlay from "./overlay.vue";
 export default {
-  components: { Carosel },
+  components: { Carosel, Overlay },
   name: "product-image",
   props: ["images", "isModal"],
   setup(props) {
@@ -145,3 +149,34 @@ export default {
   },
 };
 </script>
+<style>
+.scale-enter-active,
+.scale-leave-active {
+  transition: transform 0.2s;
+}
+.scale-enter-from {
+  transform: scale(0);
+}
+.scale-enter-to {
+  transform: scale(1);
+}
+
+.scale-leave-to {
+  transform: scale(0);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

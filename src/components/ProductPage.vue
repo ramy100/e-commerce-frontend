@@ -3,9 +3,10 @@
     class="
       md:max-w-5xl md:grid
       grid-cols-2
-      md:m-10 md:pt-10 md:gap-20 md:items-center md:justify-items-center
+      md:m-10 md:pt-10 md:gap-20 md:items-center
     "
   >
+    <!-- md:justify-items-center -->
     <div>
       <product-image
         :images="[

@@ -43,13 +43,27 @@
           alt="avatar"
         />
       </li>
-      <Cart v-if="showCart" @close="showCart = false" />
+      <teleport to="body">
+        <transition @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <Cart v-if="showCart" @close="showCart = false" />
+        </transition>
+      </teleport>
     </ul>
-    <side-menu
-      v-if="screenWidth < 768 && sideMenu"
-      @close="sideMenu = false"
-      :links="links"
-    />
+    <teleport to="body">
+      <transition name="fade" mode="in-out">
+        <overlay
+          v-if="screenWidth < 768 && sideMenu"
+          @close="sideMenu = false"
+        />
+      </transition>
+      <transition name="slide" mode="in-out">
+        <side-menu
+          v-if="screenWidth < 768 && sideMenu"
+          @close="sideMenu = false"
+          :links="links"
+        />
+      </transition>
+    </teleport>
   </div>
 </template>
 <script >
@@ -59,8 +73,11 @@ import { useStore } from "vuex";
 import { computed, ref } from "@vue/reactivity";
 import SideMenu from "./SideMenu.vue";
 import { onMounted } from "@vue/runtime-core";
+import Overlay from "./overlay.vue";
+import gsap from "gsap";
+
 export default {
-  components: { Link, Cart, SideMenu },
+  components: { Link, Cart, SideMenu, Overlay },
   setup(props) {
     const store = useStore();
     const sideMenu = ref(false);
@@ -71,6 +88,26 @@ export default {
     const screenWidth = ref(window.innerWidth);
     const setActive = (e) => {
       activeLink.value = e.target.innerText;
+    };
+    const beforeEnter = (el) => {
+      gsap.set(el, { y: "-200%" });
+    };
+    const enter = (el, done) => {
+      gsap.to(el, {
+        y: 0,
+        duration: 0.8,
+        onComplete: done,
+        ease: "elastic.inOut(1, 1)",
+      });
+    };
+    const leave = (el, done) => {
+      gsap.to(el, { x: 0, opacity: 1 });
+      gsap.to(el, {
+        y: "-200%",
+        duration: 0.8,
+        onComplete: done,
+        ease: "elastic.inOut(1, 1)",
+      });
     };
 
     onMounted(() => {
@@ -86,8 +123,42 @@ export default {
       sideMenu,
       links,
       screenWidth,
+      beforeEnter,
+      enter,
+      leave,
     };
   },
 };
 </script>
 
+<style>
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.5s;
+}
+.slide-enter-from {
+  transform: translateX(-100%);
+}
+.slide-enter-to {
+  transform: translateX(0);
+}
+
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

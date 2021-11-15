@@ -5,7 +5,7 @@ import productPage from "./components/ProductPage.vue";
 
 <template>
   <main class="h-screen">
-    <div class="pl-16 pr-16">
+    <div class="pl-10 pr-10">
       <NavBar />
     </div>
     <div class="flex justify-center md:pl-16 md:pr-16">

@@ -1,33 +1,22 @@
 <template>
-  <teleport to="body">
-    <div
-      @click.self="closeModal"
+  <div class="max-w-md grid grid-cols-1 absolute top-28 left-0 right-0 m-auto">
+    <img
       class="
-        bg-blue-darkest
-        flex
-        justify-center
-        items-center
-        bg-opacity-30
-        h-full
-        w-full
+        cursor-pointer
         absolute
-        top-0
-        left-0
+        w-5
+        -top-10
+        right-0
+        invert
+        brightness-0
+        filter
       "
-    >
-      <div class="max-w-lg grid grid-cols-1 gap-3 relative">
-        <div>
-          <img
-            class="h-4 cursor-pointer absolute -top-5 right-0"
-            @click="closeModal"
-            src="/images/icon-close.svg"
-            alt="close"
-          />
-        </div>
-        <slot></slot>
-      </div>
-    </div>
-  </teleport>
+      @click="closeModal"
+      src="/images/icon-close.svg"
+      alt="close"
+    />
+    <slot></slot>
+  </div>
 </template>
 
 <script>
