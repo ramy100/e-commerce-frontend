@@ -12,7 +12,7 @@
       <div class="text-blue-grayish">$125.00 x {{ quantity }}</div>
       <div class="price">${{ finalPrice }}.00</div>
     </div>
-    <div class="delete-action">
+    <div class="delete-action cursor-pointer">
       <img
         @click="$store.commit('reset')"
         src="/images/icon-delete.svg"
