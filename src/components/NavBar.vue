@@ -1,86 +1,93 @@
 <template>
-  <div className="navBar">
-    <ul className="right-links">
+  <div className="flex justify-between pt-6 pb-6 ">
+    <ul className="grid grid-flow-col items-center gap-6 ">
+      <li class="md:hidden mt-1" @click="sideMenu = true">
+        <img src="images/icon-menu.svg" alt="" />
+      </li>
       <li>
         <img src="images/logo.svg" alt="" />
       </li>
-      <Link class="active">Collections</Link>
-      <Link>Men</Link>
-      <Link>Women</Link>
-      <Link>About</Link>
-      <Link>Contact</Link>
-      <!-- <Link>{{ $screen.width }}</Link> -->
+      <Link
+        v-for="link in links"
+        :key="link"
+        class="hidden md:block"
+        @click="setActive"
+        :active="activeLink == link"
+        >{{ link }}</Link
+      >
     </ul>
-    <ul className="left-links">
+    <ul className="grid grid-flow-col items-center gap-5">
       <li @click="showCart = !showCart">
         <img src="images/icon-cart.svg" alt="" />
-        <div v-if="quantity" class="cart-count">{{ quantity }}</div>
+        <div
+          v-if="quantity"
+          class="
+            absolute
+            pl-2
+            pr-2
+            -top-2
+            -right-2
+            bg-orange
+            rounded-lg
+            text-xs
+          "
+        >
+          {{ quantity }}
+        </div>
       </li>
       <li>
-        <img width="50" src="images/image-avatar.png" alt="" />
+        <img
+          class="border-orange border-2 rounded-full"
+          width="50"
+          src="images/image-avatar.png"
+          alt=""
+        />
       </li>
-      <Cart v-if="showCart" />
+      <Cart v-if="showCart" @close="showCart = false" />
     </ul>
+    <side-menu
+      v-if="screenWidth < 768 && sideMenu"
+      @close="sideMenu = false"
+      :links="links"
+    />
   </div>
 </template>
 <script lang="ts">
 import Link from "./Link.vue";
 import Cart from "./Cart.vue";
+import { useStore } from "vuex";
+import { computed, ref } from "@vue/reactivity";
+import SideMenu from "./SideMenu.vue";
+import { onMounted } from "@vue/runtime-core";
 export default {
-  components: { Link, Cart },
-  data() {
-    return {
-      showCart: false,
+  components: { Link, Cart, SideMenu },
+  setup(props) {
+    const store = useStore();
+    const sideMenu = ref(false);
+    const links = ref(["Collections", "Men", "Women", "About", "Contact us"]);
+    const quantity = computed(() => store.state.quantity);
+    const activeLink = ref("Collections");
+    const showCart = ref(false);
+    const screenWidth = ref(window.innerWidth);
+    const setActive = (e: any) => {
+      activeLink.value = e.target.innerText;
     };
-  },
-  computed: {
-    quantity() {
-      return this.$store.state.quantity;
-    },
+
+    onMounted(() => {
+      window.addEventListener("resize", () => {
+        screenWidth.value = window.innerWidth;
+      });
+    });
+    return {
+      quantity,
+      showCart,
+      setActive,
+      activeLink,
+      sideMenu,
+      links,
+      screenWidth,
+    };
   },
 };
 </script>
-<style lang="scss" scoped>
-li {
-  position: relative;
-  cursor: pointer;
-}
-.cart-count {
-  position: absolute;
-  top: -10px;
-  right: 15px;
-  background-color: var(--Orange);
-  padding-left: 10px;
-  padding-right: 10px;
-  color: white;
-  border-radius: 60px;
-  font-size: 12px;
-}
-.navBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
 
-.right-links {
-  display: grid;
-  grid-template-columns: repeat(6, auto);
-  gap: 40px;
-
-  align-items: center;
-}
-.left-links {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  align-items: center;
-}
-
-@media only screen and (min-width: 500px) {
-  .left-links,
-  .right-links {
-    display: hidden;
-  }
-}
-</style>

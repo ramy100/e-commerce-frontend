@@ -1,5 +1,11 @@
 <template>
-  <div class="wrapper">
+  <div
+    class="
+      md:max-w-5xl md:grid
+      grid-cols-2
+      md:m-10 md:pt-10 md:gap-20 md:items-center md:justify-items-center
+    "
+  >
     <div>
       <product-image
         :images="[
@@ -8,10 +14,10 @@
           'images/image-product-3.jpg',
           'images/image-product-4.jpg',
         ]"
-        class="images"
+        :isModal="false"
       />
     </div>
-    <product-desc @setCount="soso" />
+    <product-desc class="md:p-0 p-10" />
   </div>
 </template>
 
@@ -21,22 +27,5 @@ import ProductImage from "./ProductImage.vue";
 
 export default {
   components: { ProductImage, ProductDesc },
-  methods: {
-    soso() {
-      console.log("object");
-    },
-  },
 };
 </script>
-
-ProductDesc
-<style scoped>
-.wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 2rem;
-  padding-bottom: 5rem;
-  gap: 5rem;
-  align-items: center;
-}
-</style>

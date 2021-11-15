@@ -1,50 +1,69 @@
 <template>
-  <div class="cart-wrapper">
-    <h2 class="header">Cart</h2>
-    <div class="cart-items">
-      <cart-item />
+  <teleport to="body">
+    <div
+      class="
+        md:w-96
+        w-11/12
+        absolute
+        right-0
+        md:left-auto md:top-20
+        top-28
+        left-0
+        ml-auto
+        mr-auto
+        justify-center
+        flex flex-col
+        items-center
+        bg-white
+        gap-14
+        shadow-2xl
+        z-10
+        md:pt-10
+        p-10
+        pb-20
+      "
+    >
+      <div class="flex justify-between w-full">
+        <h2>Cart</h2>
+        <img
+          class="h-4 cursor-pointer"
+          @click="close"
+          src="images/icon-close.svg"
+          alt=""
+          srcset=""
+        />
+      </div>
+      <div class="cart-items">
+        <cart-item />
+      </div>
+      <Button
+        v-if="quantity"
+        class="h-11 pl-16 pr-16 w-full"
+        title="Checkout"
+      />
     </div>
-    <Button class="checkout" title="Checkout" />
-  </div>
+  </teleport>
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
 import Button from "./Button.vue";
 import CartItem from "./CartItem.vue";
+import { watchEffect } from "@vue/runtime-core";
 export default {
   components: { Button, CartItem },
-  computed: {
-    quantity() {
-      this.$store.state.quantity;
-    },
+  emits: ["close"],
+  setup(props, { emit }) {
+    const store = useStore();
+    const quantity = ref(store.state.quantity);
+    watchEffect(() => {
+      quantity.value = store.state.quantity;
+    });
+    const close = () => {
+      emit("close");
+    };
+    return { quantity, close };
   },
 };
 </script>
-
-<style scoped>
-.cart-wrapper {
-  top: 8rem;
-  width: 400px;
-  right: 0;
-  position: absolute;
-  z-index: 1;
-  display: flex;
-  box-shadow: 0 10px 20px 1px #999999;
-  border: none;
-  border-radius: 20px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  background-color: white;
-  gap: 25px;
-}
-
-.header {
-  align-self: start;
-}
-.checkout {
-  width: 70%;
-  height: 40px;
-}
-</style>

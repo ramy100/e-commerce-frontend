@@ -1,38 +1,15 @@
 <template>
-  <li @click="setActive" class="link">
+  <li>
     <slot></slot>
+    <div
+      :class="{ hidden: !active }"
+      class="absolute bg-orange w-full h-1 -bottom-8 duration-300"
+    ></div>
   </li>
 </template>
 <script lang="ts">
 export default {
-  methods: {
-    setActive(e: any) {
-      const all = document.getElementsByClassName("active");
-      Array.from(all).forEach((el) => {
-        if (e.target != el) el.classList.remove("active");
-      });
-      e.target.classList.add("active");
-    },
-  },
+  props: ["active"],
 };
 </script>
 
-<style lang="scss" scoped>
-li {
-  position: relative;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  text-align: center;
-}
-.link::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 5px;
-  bottom: 0;
-  left: 0;
-}
-.active:after {
-  background-color: var(--Orange);
-}
-</style>

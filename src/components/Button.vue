@@ -1,5 +1,17 @@
 <template>
-  <div class="button-wrapper">
+  <div
+    class="
+      button-wrapper
+      bg-orange
+      text-white text-sm
+      cursor-pointer
+      flex
+      justify-center
+      items-center
+      rounded-xl
+      gap-3
+    "
+  >
     <img v-if="withIcon" class="cart-icon" src="images/icon-cart.svg" alt="" />
     <h4>{{ title }}</h4>
   </div>
@@ -12,18 +24,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.button-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--Orange);
-  color: white;
-  border-radius: 10px;
-  gap: 10px;
-  height: 100%;
-  cursor: pointer;
-}
+<style lang="scss" >
 .cart-icon {
   filter: brightness(0) invert(1);
 }
