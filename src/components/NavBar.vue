@@ -2,10 +2,10 @@
   <div className="flex justify-between pt-6 pb-6 ">
     <ul className="grid grid-flow-col items-center gap-6 ">
       <li class="md:hidden mt-1" @click="sideMenu = true">
-        <img src="images/icon-menu.svg" alt="" />
+        <img src="/images/icon-menu.svg" alt="" />
       </li>
       <li>
-        <img src="images/logo.svg" alt="" />
+        <img src="/images/logo.svg" alt="" />
       </li>
       <Link
         v-for="link in links"
@@ -18,7 +18,7 @@
     </ul>
     <ul className="grid grid-flow-col items-center gap-5">
       <li @click="showCart = !showCart">
-        <img src="images/icon-cart.svg" alt="" />
+        <img src="/images/icon-cart.svg" alt="" />
         <div
           v-if="quantity"
           class="
@@ -39,7 +39,7 @@
         <img
           class="border-orange border-2 rounded-full"
           width="50"
-          src="images/image-avatar.png"
+          src="/images/image-avatar.png"
           alt=""
         />
       </li>
@@ -52,7 +52,7 @@
     />
   </div>
 </template>
-<script lang="ts">
+<script >
 import Link from "./Link.vue";
 import Cart from "./Cart.vue";
 import { useStore } from "vuex";
@@ -69,7 +69,7 @@ export default {
     const activeLink = ref("Collections");
     const showCart = ref(false);
     const screenWidth = ref(window.innerWidth);
-    const setActive = (e: any) => {
+    const setActive = (e) => {
       activeLink.value = e.target.innerText;
     };
 

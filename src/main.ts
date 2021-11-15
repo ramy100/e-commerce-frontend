@@ -3,7 +3,7 @@ import { createStore } from 'vuex';
 import '../index.css';
 import App from './App.vue';
 
-const store = createStore({
+const store = createStore<{ quantity: number }>({
   state() {
     return {
       quantity: 0,

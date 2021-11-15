@@ -20,7 +20,7 @@
           <img
             class="h-4 cursor-pointer absolute -top-5 right-0"
             @click="closeModal"
-            src="images/icon-close.svg"
+            src="/images/icon-close.svg"
             alt=""
             srcset=""
           />

@@ -20,7 +20,7 @@
         "
         @click="goToImage('prev')"
       >
-        <img src="images/icon-previous.svg" alt="" srcset="" />
+        <img src="/images/icon-previous.svg" alt="" srcset="" />
       </div>
 
       <img
@@ -48,7 +48,7 @@
         "
         @click="goToImage('next')"
       >
-        <img src="images/icon-next.svg" alt="" srcset="" />
+        <img src="/images/icon-next.svg" alt="" srcset="" />
       </div>
     </div>
     <ul class="md:grid grid-cols-4 gap-2 hidden">
@@ -90,7 +90,7 @@
   </carosel>
 </template>
 
-<script lang="ts">
+<script >
 import { ref } from "@vue/reactivity";
 import Carosel from "./Carosel.vue";
 import { onMounted } from "@vue/runtime-core";
@@ -116,7 +116,7 @@ export default {
     const open = () => {
       !props.isModal ? (showCarosel.value = true) : null;
     };
-    const goToImage = (to: "next" | "prev") => {
+    const goToImage = (to) => {
       if (to == "next") {
         index.value =
           index.value + 1 == props.images.length ? 0 : index.value + 1;
@@ -127,7 +127,7 @@ export default {
       }
       active.value = props.images[index.value];
     };
-    const setActiveImage = (num: number) => {
+    const setActiveImage = (num) => {
       index.value = num;
       active.value = props.images[num];
     };

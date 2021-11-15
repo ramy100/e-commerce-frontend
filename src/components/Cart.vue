@@ -28,7 +28,7 @@
         <img
           class="h-4 cursor-pointer"
           @click="close"
-          src="images/icon-close.svg"
+          src="/images/icon-close.svg"
           alt=""
           srcset=""
         />

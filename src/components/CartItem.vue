@@ -2,7 +2,7 @@
   <div class="grid grid-flow-col gap-3 items-center" v-if="quantity > 0">
     <img
       class="w-16 rounded-lg"
-      src="images/image-product-1-thumbnail.jpg"
+      src="/images/image-product-1-thumbnail.jpg"
       alt=""
     />
     <div class="grid grid-cols-2">
@@ -15,7 +15,7 @@
     <div class="delete-action">
       <img
         @click="$store.commit('reset')"
-        src="images/icon-delete.svg"
+        src="/images/icon-delete.svg"
         alt=""
       />
     </div>
